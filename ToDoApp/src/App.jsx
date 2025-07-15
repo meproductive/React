@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './todoapp.scss'
 
 function App() {
     const [task, setTask] = useState('');
@@ -34,27 +35,29 @@ function App() {
 
     return (
 
-      <div style={{padding: '2rem', maxWidth: '500px', margin: '0 auto', border: '1px solid white'}}>
-        
-        <h1>To Do List</h1>
+        <div className="grid grid-cols-1 grid-rows-3 place-items-center gap-x-4">
 
-        <form onSubmit={addTask}>
+        {/* <span>To Do Counter {}</span> */}
+
+        <h1 className="text-3xl font-bold text-center custom-title text-blue-800">To Do List</h1>
+
+        <form onSubmit={addTask} className="flex gap-4">
          
-          <input type="text" placeholder="Add new task..." value={task} onChange={(e) => setTask(e.target.value)} style={{width: '80%', padding: '0.5rem'}}></input>
+          <input type="text" placeholder="Add new task..." value={task} onChange={(e) => setTask(e.target.value)} className="hover:border-indigo-500 focus:outline-1 focus:outline-indigo-500"></input>
           
-          <button type="submit" style={{padding: '0.5rem', float: 'right', marginRight: '2rem', marginTop: '1rem'}}>Add</button>
+          <button type="submit" className="hover:border-indigo-500 hover:bg-slate-900 hover:text-lime-400/70">Add</button>
 
         </form>
 
-        <ul style={{marginTop: '1rem', listStyle: 'none', padding: 0}}>
+        <ul className="w-full">
 
           {todos.map((todo) => (
 
-            <li key={todo.id} style={{marginBottom: '0.5rem', display: 'flex'}}>
+            <li key={todo.id} className="flex items-center justify-between">
 
-              <span onClick={() => toggleComplete(todo.id)} style={{textDecoration: todo.completed ? 'line-through' : 'none', cursor: 'pointer'}}>{todo.text}</span>
+              <span onClick={() => toggleComplete(todo.id)} style={{textDecoration: todo.completed ? 'line-through green' : 'line-through red', cursor: 'pointer'}}>{todo.text}</span>
               
-              <button onClick={() => deleteTask(todo.id)} style={{marginLeft: '1rem', color: 'red'}}>Delete</button>
+              <button onClick={() => deleteTask(todo.id)} className="hover:border-indigo-500 hover:bg-slate-900 hover:text-red-600/80">Delete</button>
 
             </li>
 
